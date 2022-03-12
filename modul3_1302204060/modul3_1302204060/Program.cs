@@ -27,6 +27,43 @@
             }
         }
     }
+    class PosisiKarakterGame
+    {
+        enum State { Berdiri, Jongkok, Berdiri2};
+        public void tombol()
+        {
+            State state = State.Berdiri;
+
+            String[] screenName = { "Berdiri", "tombol arah bawah ditekan", "tombol arah atas ditekan"};
+            do
+            {
+                Console.WriteLine("" + screenName[(int)state]);
+                Console.Write("Tekan Tombol : ");
+                String command = Console.ReadLine();
+                switch (state)
+                {
+                    case State.Berdiri:
+                        if (command == "TombolS")
+                        {
+                            state = State.Jongkok;
+                        }
+                        break;
+                    case State.Jongkok:
+                        if (command == "TombolW")
+                        {
+                            state = State.Berdiri2;
+                        }
+                        break;
+                    case State.Berdiri2:
+                        if (command == "Stop")
+                        {
+                            state = State.Berdiri;
+                        }
+                        break;
+                }
+            } while (state != State.Berdiri);
+        }
+    }
 
     class Program
     {
@@ -35,6 +72,10 @@
             KodeBuah table_Kodebuah = new KodeBuah();
             Console.WriteLine("Nama Buah        Kode Buah");
             table_Kodebuah.getKodeBuah();
+            
+            Console.WriteLine("==== State Awal ====");
+            PosisiKarakterGame game = new PosisiKarakterGame();
+            game.tombol();
         }
     }
 }
